@@ -1,0 +1,11 @@
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/obj/Debug/netcoreapp2.2/Sales_Taxes.csprojAssemblyReference.cache
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/obj/Debug/netcoreapp2.2/Sales_Taxes.csproj.CoreCompileInputs.cache
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/obj/Debug/netcoreapp2.2/Sales_Taxes.AssemblyInfoInputs.cache
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/obj/Debug/netcoreapp2.2/Sales_Taxes.AssemblyInfo.cs
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/Sales_Taxes.deps.json
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/Sales_Taxes.runtimeconfig.json
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/Sales_Taxes.runtimeconfig.dev.json
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/Sales_Taxes.dll
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/Sales_Taxes.pdb
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/obj/Debug/netcoreapp2.2/Sales_Taxes.dll
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/obj/Debug/netcoreapp2.2/Sales_Taxes.pdb
