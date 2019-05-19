@@ -9,3 +9,6 @@
 /home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/Sales_Taxes.pdb
 /home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/obj/Debug/netcoreapp2.2/Sales_Taxes.dll
 /home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/obj/Debug/netcoreapp2.2/Sales_Taxes.pdb
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/xunit.runner.reporters.netcoreapp10.dll
+/home/drakegao/Workspace/Practice/dotnet_practice/Sales_Taxes/bin/Debug/netcoreapp2.2/xunit.runner.utility.netcoreapp10.dll
