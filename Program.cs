@@ -10,10 +10,12 @@ namespace Sales_Taxes
 
             Store store = new Store();
 
-            int count = store.AddCommand("1 Book at 12.49");
-            count = store.AddCommand("1 Book at 12.49");
-            count = store.AddCommand("1 Music CD at 14.99");
-            count = store.AddCommand("1 Imported bottle of perfume at 47.50");
+            int count = store.AddCommand("1 Imported bottle of perfume at 27.99");
+            count = store.AddCommand("1 Bottle of perfume at 18.99");
+            count = store.AddCommand("1 Packet of headache pills at 9.75");
+            count = store.AddCommand("1 Imported box of chocolates at 11.25");
+            count = store.AddCommand("1 Imported box of chocolates at 11.25");
+
             Console.WriteLine(count);
 
             store.CheckStoreCarItems();

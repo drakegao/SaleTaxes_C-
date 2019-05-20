@@ -8,6 +8,8 @@ namespace Sales_Taxes
         public Store() {
             this.ItemsMap = new Dictionary<string, List<Item>>();
             this.CommandListItem = new List<Item>();
+            this.SaleTax = 0.0;
+            this.Total = 0.0;
         }
 
         public int AddCommand(string command) {
@@ -42,14 +44,18 @@ namespace Sales_Taxes
                     double importTax = 0;
                     if(isImported) {
                         double tax = price * 0.05;
-                        //double tax = Math.Round(price * 0.05, 2); //Math.Ceiling((price * 0.05) * 20) / 20;
-                        importTax += tax;
+                        importTax += Math.Round(tax, 2);
+
+                        double extraRoundUp = RoundUp(importTax);
+                        if(extraRoundUp != 0.05)
+                            importTax += extraRoundUp;
                     }
+                    this.SaleTax += importTax;
 
                     if(name == "book") {
                         var tempPrice = price + importTax;
                         var item = new Book {
-                            Name = name,
+                            Name = (isImported) ? "Imported " + name : name,
                             Price = (Math.Ceiling(tempPrice) - tempPrice == 0.50) ? tempPrice : Math.Round(tempPrice, 2),
                             IsImported = isImported,
                             ShouldExampt = !isImported,
@@ -61,7 +67,7 @@ namespace Sales_Taxes
                         // is a food
                         var tempPrice = price + importTax;
                         var item = new Food {
-                            Name = name,
+                            Name = (isImported) ? "Imported " + name : name,
                             Price = (Math.Ceiling(tempPrice) - tempPrice == 0.50) ? tempPrice : Math.Round(tempPrice, 2),
                             IsImported = isImported,
                             ShouldExampt = !isImported,
@@ -73,7 +79,7 @@ namespace Sales_Taxes
                         // find medical items
                         var tempPrice = price + importTax;
                         var item = new Medical {
-                            Name = name,
+                            Name = (isImported) ? "Imported " + name : name,
                             Price = (Math.Ceiling(tempPrice) - tempPrice == 0.50) ? tempPrice : Math.Round(tempPrice, 2),
                             IsImported = isImported,
                             ShouldExampt = !isImported,
@@ -83,29 +89,42 @@ namespace Sales_Taxes
 
                     } else {
                         // regular items
-                        //if(!isImported) {
                         // 10% tax for regular item
-                        double saleTax = price * 0.1;
+                        double saleTax = Math.Round(price * 0.1, 2);
+
+                        // extra round to nearest 0.5 for sale tax
+                        double extraRoundUp = RoundUp(saleTax);
+                        if(extraRoundUp != 0.05)
+                            saleTax += extraRoundUp;
 
                         double taxSum = saleTax + importTax;
-                        // Math.Ceiling((price * 0.1) * 20) / 20;
                         double tempPrice = price + taxSum;
-                        //}
+
+                        this.SaleTax += saleTax;
                         var item = new OtherItem {
-                            Name = name,
-                            Price = (Math.Ceiling(tempPrice) - tempPrice == 0.50) ? tempPrice : Math.Round(tempPrice, 2),
+                            Name = (isImported) ? "Imported " + name : name,
+                            Price = tempPrice,
                             IsImported = isImported,
                             ShouldExampt = false,
                             Type = "general"
                         };
                         CommandListItem.Add(item);
-
                     }
                 }
                 return CommandListItem.Count;
             } else {
                 return -1;
             }
+        }
+
+        public double RoundUp(double value) {
+            double remain = value % 0.1;
+            if(remain == 0.05)
+                return 0.05;
+            else if(remain > 0.05)
+                return (0.1 - remain);
+            else
+                return 0.0;
         }
 
         public bool ValidateCommand(string command) {
@@ -117,7 +136,7 @@ namespace Sales_Taxes
             double price = 0;
 
             if(commandInfo.Length < 4) {
-                Console.WriteLine("Error on adding command, please check the input format\nNo item is added");
+                Console.WriteLine("Error on adding command, please check the input format for length\nNo item is added");
                 validInput = false;
             }
 
@@ -126,7 +145,7 @@ namespace Sales_Taxes
                 quatity = Convert.ToInt32(commandInfo[0]);
             } catch(Exception e) {
                 Console.WriteLine(e);
-                Console.WriteLine("Error on adding command, please check the input format\nNo item is added");
+                Console.WriteLine("Error on adding command, please check the input format for quantity\nNo item is added");
                 validInput = false;
             }
 
@@ -136,7 +155,7 @@ namespace Sales_Taxes
                 price = Convert.ToDouble(priceString);
             } catch(Exception e) {
                 Console.WriteLine(e);
-                Console.WriteLine("Error on adding command, please check the input format\nNo item is added");
+                Console.WriteLine("Error on adding command, please check the input format for price\nNo item is added");
                 validInput = false;
             }
 
@@ -150,14 +169,15 @@ namespace Sales_Taxes
 
         // print for receipt
         public string PrintReciept() {
-           string finalMessege = "";
-           Console.WriteLine();
-           Console.WriteLine("----Reciept------");
-           foreach(KeyValuePair<string, List<Item>> entry in ItemsMap)
+            string finalMessege = "";
+            Console.WriteLine();
+            Console.WriteLine("----Reciept------");
+            foreach(KeyValuePair<string, List<Item>> entry in ItemsMap)
             {
                 finalMessege += AddFormatStringForPrint(entry) + '\n';
             }
-            Console.WriteLine(finalMessege);
+            Console.Write(finalMessege);
+            Console.WriteLine("Sale Taxes: " + this.SaleTax + "\nTotal: " + this.Total);
             return finalMessege;
         }
 
@@ -216,6 +236,7 @@ namespace Sales_Taxes
             {
                 finalPrice += item.Price;
             }
+            this.Total += finalPrice;
 
             string itemName = (singleItem.IsImported) ? "Imported " + singleItem.Name : singleItem.Name;
             string endingMessege = (itemCount > 1) ? "(" + itemCount.ToString() + " @ " + singleItem.Price.ToString() + " )" : "";
@@ -230,6 +251,7 @@ namespace Sales_Taxes
         public  List<Item> CommandListItem { get; set; } 
         public  Dictionary<string, List<Item>> ItemsMap { get; set; }
         public double SaleTax { get; set; }
+        public double Total { get; set; }
 
     }
 }

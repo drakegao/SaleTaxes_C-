@@ -39,17 +39,19 @@ namespace Sales_Taxes
         }
 
         [Fact]
-        public void PassingAddFormatStringForPrint() {
+        public void PassingTotalPrice() {
             Store store = new Store();
             int count = store.AddCommand("1 Book at 12.49");
+            count = store.AddCommand("1 Book at 12.49");
             count = store.AddCommand("1 Music CD at 14.99");
-
-            // testing items in commands list count
-            Assert.Equal(2, count);
+            count = store.AddCommand("1 Chocolate bar at 0.85");
+            Assert.Equal(4, count);
 
             store.AddCommandItemsToItemMap();
-            int count2 = store.ItemsMap.Count;
-            Assert.Equal(2, count2);
+            store.PrintReciept();
+            
+            double total = store.Total;
+            Assert.Equal(42.32, total);
         }
     }
 }
