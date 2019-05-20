@@ -191,10 +191,12 @@ namespace Sales_Taxes
         }
 
         public void CheckStoreCarItems() {
+            Console.WriteLine("---------------Your shopping cart ----------------");
             Console.WriteLine("You have: ");
             foreach(var item in this.CommandListItem) {
                 Console.WriteLine(item.Name + " @ " + item.Price);
             }
+            Console.WriteLine("-------------------------------\n");
         }
 
         private void AddToItemMap(Item item) {

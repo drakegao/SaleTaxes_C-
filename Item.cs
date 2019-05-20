@@ -1,7 +1,7 @@
 using System;
 namespace Sales_Taxes
 {
-    public class Item
+    public abstract class Item
     {
         public string Name { get;set; }
         public double Price { get; set; }
